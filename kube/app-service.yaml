@@ -1,0 +1,39 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: flask-test-svc
+  namespace: default
+spec:
+  ports:
+  - name: http
+    port: 80
+    targetPort: 8000
+  selector:
+    app: flask-test
+---
+apiVersion: getambassador.io/v2
+kind: Mapping
+metadata:
+  name: flask-test
+  namespace: default
+spec:
+  prefix: /flask/
+  service: flask-test-svc
+---
+apiVersion: getambassador.io/v2
+kind: FilterPolicy
+metadata:
+  name: flask-test-policy
+  namespace: default
+spec:
+  rules:
+    - host: "*"
+      path: /flask/*
+      filters:
+        - name: pufin-realm-filter
+          namespace: default
+          arguments:
+            scopes:
+            - "offline_access"
+
