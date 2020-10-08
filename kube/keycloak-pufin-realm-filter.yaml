@@ -1,0 +1,15 @@
+---
+apiVersion: getambassador.io/v2
+kind: Filter
+metadata:
+  name: pufin-realm-filter
+  namespace: default
+spec:
+  OAuth2:
+    authorizationURL: http://10.99.238.2:8080/auth/realms/pufin
+    audience: pufin
+    clientID: pufin
+    secretName: keycloack-pufin-realm-secret
+    protectedOrigins:
+        - origin: http://keycloak.172.17.0.3.nip.io:31296
+        - origin: http://172.17.0.3:31296
