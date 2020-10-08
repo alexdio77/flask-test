@@ -6,9 +6,9 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://github.com/marcel-dempers/docker-development-youtube-series.git
+    repoURL: https://github.com/alexdio77/flask-test.git
     targetRevision: HEAD
-    path: argo/example-app
+    path: /
     directory:
       recurse: true
   destination:
